@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio Profile</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #333;
+      padding: 10px;
+    }
+
+    .navbar button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px 16px;
+      transition: background 0.3s;
+    }
+
+    .navbar button:hover {
+      background: #575757;
+      border-radius: 4px;
+    }
+
+    .section {
+      display: none;
+      padding: 20px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <button id="navLogin" onclick="showSection('login')">Login</button>
+    <button id="navHome" class="hidden" onclick="showSection('home')">Home</button>
+    <button id="navSkills" class="hidden" onclick="showSection('skills')">Skills</button>
+    <button id="navCertificates" class="hidden" onclick="showSection('certificates')">Certificates</button>
+    <button id="navLogout" class="hidden" onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Sections -->
+  <div id="login" class="section active">
+    <h2>Login</h2>
+    <p>Enter your credentials to access your portfolio.</p>
+    <input type="text" id="username" placeholder="Username"><br><br>
+    <input type="password" id="password" placeholder="Password"><br><br>
+    <button onclick="login()">Submit</button>
+    <p id="loginMsg" style="color:red;"></p>
+  </div>
+
+  <div id="home" class="section">
+    <h2>Home</h2>
+    <p>Hi I AM Dileep Kumar.This Is My portfolio profile interface!</p>
+  </div>
+
+  <div id="skills" class="section">
+    <h2>Skills</h2>
+    <ul>
+      <li>HTML, CSS, JavaScript</li>
+      <li>Python & SQL</li>
+      <li>UI/UX Design</li>
+    </ul>
+  </div>
+
+  <div id="certificates" class="section">
+    <h2>Certificates</h2>
+    <p>Upload and view your certificates here.</p>
+    <input type="file" accept=".pdf,.jpg,.png">
+  </div>
+
+  <div id="logout" class="section">
+    <h2>Logout</h2>
+    <p>You have been logged out successfully.</p>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const msg = document.getElementById('loginMsg');
+
+      // Simple demo validation (replace with real authentication)
+      if (user === "admin" && pass === "1234") {
+        msg.textContent = "";
+        // Show other nav buttons
+        document.getElementById('navHome').classList.remove('hidden');
+        document.getElementById('navSkills').classList.remove('hidden');
+        document.getElementById('navCertificates').classList.remove('hidden');
+        document.getElementById('navLogout').classList.remove('hidden');
+        document.getElementById('navLogin').classList.add('hidden');
+        // Redirect to Home
+        showSection('home');
+      } else {
+        msg.textContent = "Invalid username or password!";
+      }
+    }
+
+    function logout() {
+      showSection('logout');
+      // Reset nav visibility
+      document.getElementById('navHome').classList.add('hidden');
+      document.getElementById('navSkills').classList.add('hidden');
+      document.getElementById('navCertificates').classList.add('hidden');
+      document.getElementById('navLogout').classList.add('hidden');
+      document.getElementById('navLogin').classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
